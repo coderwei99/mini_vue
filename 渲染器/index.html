@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app"></div>
+  <script src="./renderer.js"></script>
+  <script >
+
+
+    // 1.通过h函数创建一个vnode
+    const vnode = h('div',{class: 'why',aaa:'aaa'},[
+      h('h2',{class:'同级的class'},'当前计数'),
+      h('button',null,'+1'),
+      h('div',null,[
+      h('h2',{class:'再次嵌套的class'},[
+        h('p',{class:'my-p'},[
+          h('text',null,'p-text'),
+          h('text',null,'p-text2')
+        ])
+      ]),
+      h('button',{onClick:function(){console.log(111)}},'text'),
+      ])
+    ])
+    console.log(vnode);
+    const app = document.querySelector('#app')
+    mount(vnode,app)
+
+    // 2.创建新的vnode替换上面的vnode
+    setTimeout(()=>{
+      const newvnode = h('div',{class:'newVnode',aaa:'aaa'},[
+        h('div',{class:'dwdwdwdw'},'text'),
+        h('div',{class:'dwdwdwdw'},'222')
+      ])
+      patch(vnode,newvnode)
+    },2000)
+  </script>
+</body>
+</html>
